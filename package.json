@@ -1,24 +1,26 @@
 {
-    "name": "angular-count-to",
+    "name": "angularjs-count-to",
     "version": "0.2.0",
     "description": "Angular JS directive for counting to a number over time",
-    "homepage": "http://sparkalow.github.io/angular-count-to/",
+    "homepage": "http://slackero.github.io/angularjs-count-to/",
     "repository": {
         "type": "git",
-        "url": "git://github.com/slackero/angular-count-to.git"
+        "url": "git://github.com/slackero/angularjs-count-to.git"
     },
-    "author": "Brian Matthews",
+    "author": "Oliver Georgi",
     "license": "MIT",
     "readmeFilename": "README.md",
     "contributors": [
         {
-            "name": "Oliver Georgi",
-            "email": "slackero@gmail.com"
+            "name": "Brian Matthews"
+        },
+        {
+            "name": "Patrick Fitzgerald"
         }
     ],
-    "main": "dist/count-to.min.js",
+    "main": "dist/angularjs-count-to.min.js",
     "scripts": {
-        "build": "mkdir -p dist && rm -rf dist/*.* && uglifyjs src/count-to.js > dist/angular-count-to.min.js"
+        "build": "mkdir -p dist && rm -rf dist/*.* && uglifyjs src/count-to.js > dist/angularjs-count-to.min.js"
     },
     "devDependencies": {
         "uglify-js": "^3.6.0"

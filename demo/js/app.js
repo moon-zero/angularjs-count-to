@@ -1,7 +1,6 @@
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('myApp', ['countTo']);
 
-
 myApp.controller('demoController', function ($scope) {
 
     $scope.countTo = 100;
