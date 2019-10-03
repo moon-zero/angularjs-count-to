@@ -5,8 +5,14 @@ var countTo = angular.module('countTo', [])
             scope: true,
             link: function (scope, element, attrs) {
 
-                var e = element[0];
-                var num, refreshInterval, duration, steps, step, countTo, value, increment;
+                var e = element[0],
+                    num,
+                    refreshInterval,
+                    duration,
+                    steps,
+                    step,
+                    countTo,
+                    increment;
 
                 var calculate = function () {
                     refreshInterval = 30;
@@ -19,7 +25,7 @@ var countTo = angular.module('countTo', [])
                     steps = Math.ceil(duration / refreshInterval);
                     increment = ((countTo - scope.value) / steps);
                     num = scope.value;
-                }
+                };
 
                 var tick = function () {
                     scope.timoutId = $timeout(function () {
@@ -34,8 +40,7 @@ var countTo = angular.module('countTo', [])
                             tick();
                         }
                     }, refreshInterval);
-
-                }
+                };
 
                 var start = function () {
                     if (scope.timoutId) {
@@ -43,7 +48,7 @@ var countTo = angular.module('countTo', [])
                     }
                     calculate();
                     tick();
-                }
+                };
 
                 attrs.$observe('countTo', function (val) {
                     if (val) {
@@ -58,5 +63,4 @@ var countTo = angular.module('countTo', [])
                 return true;
             }
         }
-
     }]);
