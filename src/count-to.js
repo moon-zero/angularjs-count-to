@@ -20,16 +20,31 @@
                         steps,
                         step,
                         countTo,
-                        increment;
+                        increment,
+                        percentCompleted,
+                        slowCount,
+                        slowFrom,
+                        slowDelay,
+                        slowerFrom,
+                        slowerDelay;
 
                     var calculate = function () {
-                        refreshInterval = 30;
                         step = 0;
+                        percentCompleted = 0;
                         scope.timoutId = null;
                         scope.filter = attrs.filter;
                         scope.fractionSize = attrs.fractionSize ? attrs.fractionSize : 0;
                         scope.params = attrs.params ? attrs.params : scope.fractionSize;
+                        refreshInterval = attrs.refreshInterval ? parseInt(attrs.refreshInterval, 10) || 30 : 30;
+                        slowCount = attrs.slowCount ? parseInt(attrs.slowCount, 10) : 0;
+                        slowFrom = attrs.slowFrom ? parseInt(attrs.slowFrom, 10) || 75 : 75;
+                        slowDelay = attrs.slowDelay ? parseInt(attrs.slowDelay, 10) || 15 : 15;
+                        slowerFrom = attrs.slowerFrom ? parseInt(attrs.slowerFrom, 10) || 90 : 90;
+                        slowerDelay = attrs.slowerDelay ? parseInt(attrs.slowerDelay, 10) || 50 : 50;
                         countTo = parseFloat(attrs.countTo) || 0;
+                        if (slowCount && countTo > slowCount) {
+                            countTo = countTo - slowCount;
+                        }
                         scope.value = parseFloat(attrs.value) || 0;
                         duration = (parseFloat(attrs.duration) * 1000) || 0;
 
@@ -41,14 +56,38 @@
                     var tick = function () {
                         scope.timoutId = $timeout(function () {
                             num += increment;
+                            if (slowCount) {
+                                percentCompleted = Math.round((num / countTo) * 100);
+                                if (percentCompleted > slowFrom && percentCompleted < slowerFrom) {
+                                    refreshInterval += slowDelay;
+                                } else if (percentCompleted > slowerFrom) {
+                                    refreshInterval += slowerDelay;
+                                }
+                            }
                             step++;
                             if (step >= steps) {
                                 $timeout.cancel(scope.timoutId);
                                 num = countTo;
                                 e.textContent = scope.filter ? $filter(scope.filter)(countTo, scope.params, scope.fractionSize) : Math.round(countTo);
+                                if(num > slowCount){
+                                    slowTick();
+                                }
                             } else {
                                 e.textContent = scope.filter ?  $filter(scope.filter)(num, scope.params, scope.fractionSize) : Math.round(num);
                                 tick();
+                            }
+                        }, refreshInterval);
+                    };
+
+                    var slowTick = function () {
+                        scope.timoutId = $timeout(function () {
+                            slowCount--;
+                            if(slowCount < 0){
+                                $timeout.cancel(scope.timoutId);
+                            } else {
+                                countTo++;
+                                e.textContent = scope.filter ? $filter(scope.filter)(countTo, scope.params, scope.fractionSize) : Math.round(countTo);
+                                slowTick();
                             }
                         }, refreshInterval);
                     };

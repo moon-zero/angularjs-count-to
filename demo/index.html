@@ -15,8 +15,17 @@
             Angular countTo directive
         </h1>
         <div class="jumbotron py-4">
-            <h1 class="text-danger mt-0" count-to="{{countTo}}" value="{{countFrom}}" filter="number" duration="4"></h1>
-
+            <h1 class="text-danger mt-0"
+                count-to="{{countTo}}"
+                value="{{countFrom}}"
+                filter="number"
+                duration="4"
+                slow-count="5"
+                slow-from="80"
+                slow-delay="10"
+                slower-from="90"
+                slower-delay="50"
+            ></h1>
             <p>
                 Count to
                 <span class="text-info font-weight-bold">{{countTo}}</span>
@@ -47,7 +56,17 @@
                 Example directive code
             </h5>
             <code ng-non-bindable>
-                &lt;h1 count-to="{{model.countTo}}" duration="4" count-from="{{model.countFrom}}" filter="number"&gt;&lt;/h1&gt;
+                &lt;h1 class="text-danger mt-0"
+                    count-to="{{model.countTo}}"
+                    value="{{model.countFrom}}"
+                    filter="number"
+                    duration="4"
+                    slow-count="5"
+                    slow-from="80"
+                    slow-delay="10"
+                    slower-from="90"
+                    slower-delay="50"
+                &gt;&lt;/h1&gt;
             </code>
         </div>
     </div>

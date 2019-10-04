@@ -49,3 +49,9 @@ The following attributes can be set as numbers on the directive element.
 - ```filter```  the [AngularJS filter](https://docs.angularjs.org/api/ng/filter).
 - ```params```  the string of filter options.
 - ```fraction-size```  the decimal formatting.
+- ```refresh-interval```  the integer to refresh count to.
+- ```slow-count```  the last numbers (integer) which should be counted to slower. If set to `0` slower count to are ignored.
+- ```slow-from```  the percentage (integer) from where to count slower to (default 75 = 75%).
+- ```slower-from```  the percentage (integer) from where to count much slower to (default 90 = 90%).
+- ```slow-delay```  how many milliseconds the slow count should be delayed.
+- ```slower-delay```  how many milliseconds the slower count should be delayed.

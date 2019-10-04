@@ -1,6 +1,6 @@
 {
     "name": "angularjs-count-to",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Angular JS directive for counting to a number over time",
     "homepage": "http://slackero.github.io/angularjs-count-to/",
     "repository": {
